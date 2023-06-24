@@ -2,7 +2,7 @@
 import { Configuration, OpenAIApi } from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { productCatalog } from "./data";
-import { csvParse } from "d3-dsv";
+// import { csvParse } from "d3-dsv";
 
 // Create an OpenAI API client (that's edge friendly!)
 const config = new Configuration({
@@ -14,14 +14,15 @@ const openai = new OpenAIApi(config);
 export const runtime = "edge";
 
 function getProductCatalog() {
-  const data = csvParse(productCatalog);
-  const result = data.map(
-    (d) =>
-      `name: ${d["Product Title"]}\nurl: ${d["Origin URL"]}\ngender: ${d["Gender Cloths"]}\nprice: ${d["price"]}\nimage: ${d["Image URL"]}]}`
-  );
-  console.log(data.columns);
-  console.log(result);
-  return result;
+  return "No product";
+  // const data = csvParse(productCatalog);
+  // const result = data.map(
+  //   (d) =>
+  //     `name: ${d["Product Title"]}\nurl: ${d["Origin URL"]}\ngender: ${d["Gender Cloths"]}\nprice: ${d["price"]}\nimage: ${d["Image URL"]}]}`
+  // );
+  // console.log(data.columns);
+  // console.log(result);
+  // return result;
 }
 
 export async function POST(req: Request) {
