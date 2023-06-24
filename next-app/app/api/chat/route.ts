@@ -210,9 +210,50 @@ export async function POST(req: Request) {
   ---
     `,
   };
+  const functions = [
+    {
+      name: "checkUrl",
+      description:
+        "Check if a URL is valid. Returns true if valid, otherwise false.",
+      parameters: {
+        type: "object",
+        properties: {
+          url: {
+            type: "string",
+            description: "The URL to check.",
+          },
+        },
+      },
+    },
+  ];
+
+  const systemMessageCheckUrl = {
+    role: "system",
+    content: `You are LuluAI, an AI assistant at Lululemon. List products that answers user's question. No over prose. Check the urls using the function given.
+    
+    Product catalog
+  ---
+    ${getProductCatalog()} 
+  ---
+    `,
+  };
+  const responseCheckUrl = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo-0613",
+    stream: false,
+    messages: [
+      systemMessageCheckUrl,
+      ...messages.map((message: any) => ({
+        content: message.content,
+        role: message.role,
+      })),
+    ],
+    functions,
+  });
+  const checkURLRep = await responseCheckUrl.json();
+  console.log(checkURLRep.choices[0]);
 
   const response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "gpt-3.5-turbo-0613",
     stream: true,
     messages: [
       systemMessage,
