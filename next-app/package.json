@@ -11,6 +11,8 @@
   "dependencies": {
     "@prisma/client": "4.16.1",
     "ai": "2.1.8",
+    "d3-dsv": "2",
+    "langchain": "^0.0.96",
     "nanoid": "^4.0.2",
     "next": "13.4.4-canary.11",
     "openai-edge": "^0.5.1",
