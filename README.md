@@ -2,8 +2,6 @@
 
 ## Architecture
 
-Stack:
-
 - Next.js, React, TailwindCSS, Prisma (just for generating tables)
 - Vercel’s AI SDK: hopefully the easiest way to build a chat app
 
