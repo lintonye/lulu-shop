@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "ai/react";
-import ReactMarkdown from "react-markdown";
+import { ChatMessage } from "../components/ChatMessage";
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
@@ -11,25 +11,7 @@ export default function Chat() {
       <div className="font-calibre text-3xl">Lululemon shop bot</div>
       <div className="flex flex-col gap-3">
         {messages.length > 0
-          ? messages.map((m) => (
-              <div key={m.id} className="whitespace-pre-wrap">
-                <div className="text-sm">
-                  {m.role === "user" ? "User: " : "AI: "}
-                </div>
-                <div className="flex flex-col">
-                  <ReactMarkdown
-                    linkTarget="_blank"
-                    components={{
-                      a: ({ className, ...props }) => (
-                        <a {...props} className={`${className} underline`} />
-                      ),
-                    }}
-                  >
-                    {m.content}
-                  </ReactMarkdown>
-                </div>
-              </div>
-            ))
+          ? messages.map((m) => <ChatMessage key={m.id} message={m} />)
           : null}
       </div>
       <form onSubmit={handleSubmit}>
