@@ -1,7 +1,7 @@
 // ./app/api/chat/route.ts
 import { Configuration, OpenAIApi } from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import { getProductCatalog } from "./data";
+import { getCustomerStatus, getProductCatalog } from "./data";
 import { generalSystemPrompt } from "./prompts";
 import { get } from "http";
 
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
   // Ask OpenAI for a streaming chat completion given the prompt
   const systemMessage = {
     role: "system",
-    content: generalSystemPrompt(getProductCatalog()),
+    content: generalSystemPrompt(getProductCatalog(), getCustomerStatus(false)),
   };
 
   const functions = [
