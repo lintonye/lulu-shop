@@ -19,7 +19,7 @@ function ProductCarousel({ products }: { products: Product[] }) {
   return (
     <div className="flex gap-1 mt-2 w-[112%] overflow-scroll ml-[-26px]">
       {products.map((product) => (
-        <Link href={product.url} key={product.url}>
+        <Link href={product.url} key={product.url} target="_blank">
           <div className="flex gap-1 flex-col text-xs w-[150px]">
             <img src={product.imageUrl} alt="Product image" />
             <div className="break-words">{product.name}</div>
