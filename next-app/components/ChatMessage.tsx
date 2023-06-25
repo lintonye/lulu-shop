@@ -18,6 +18,15 @@ export function ChatMessage({ message }: ChatMessageProps) {
             a: ({ className, ...props }) => (
               <a {...props} className={`${className} underline`} />
             ),
+            ul: ({ className, ...props }) => (
+              <ul {...props} className={`${className} list-disc ml-4`} />
+            ),
+            ol: ({ className, ...props }) => (
+              <ol {...props} className={`${className} list-decimal ml-4`} />
+            ),
+            li: ({ className, ...props }) => (
+              <li {...props} className={`${className} whitespace-normal`} />
+            ),
           }}
         >
           {message.content}
