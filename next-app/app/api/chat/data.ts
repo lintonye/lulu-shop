@@ -169,7 +169,15 @@ export function getProductCatalog() {
       "Review Score": 4.3,
     },
   ];
-  return JSON.stringify(products);
+
+  return products
+    .map((p: any) =>
+      Object.keys(p)
+        .map((k) => `${k}: ${p[k]}`)
+        .join("\n")
+    )
+    .join("\n---\n");
+
   // const data = csvParse(productCatalog);
   // const result = data.map(
   //   (d) =>
