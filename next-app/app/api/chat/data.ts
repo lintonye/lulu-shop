@@ -1,5 +1,5 @@
 export function getProductCatalog() {
-  const products = [
+  return [
     {
       "Origin URL":
         "https://shop.lululemon.com/p/women-maintops/Swiftly-Tech-LS-2-Race/_/prod9820596?color=62255",
@@ -13,6 +13,8 @@ export function getProductCatalog() {
       "New or Used": "NEW",
       price: "$78 CAD",
       "Review Score": 4.4,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW3DOBS_062255_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -27,6 +29,8 @@ export function getProductCatalog() {
       "New or Used": "",
       price: "$68 CAD",
       "Review Score": 4.5,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW1DZGS_060714_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -41,6 +45,8 @@ export function getProductCatalog() {
       "New or Used": "",
       price: "$58 CAD",
       "Review Score": 4.4,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW1DZSS_028936_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -55,6 +61,8 @@ export function getProductCatalog() {
       "New or Used": "NEW",
       price: "$64 CAD",
       "Review Score": 4,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW2DTJS_028936_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -69,6 +77,8 @@ export function getProductCatalog() {
       "New or Used": "",
       price: "$138 CAD",
       "Review Score": 2.9,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW5FARS_060997_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -83,6 +93,8 @@ export function getProductCatalog() {
       "New or Used": "",
       price: "$74 CAD",
       "Review Score": 4.5,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW7CRQS_028936_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -97,6 +109,8 @@ export function getProductCatalog() {
       "New or Used": "",
       price: "$74 CAD",
       "Review Score": 4.6,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW2DJES_060997_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -111,6 +125,8 @@ export function getProductCatalog() {
       "New or Used": "NEW",
       price: "$78 CAD",
       "Review Score": 4.4,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW8AC7T_060997_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -125,6 +141,8 @@ export function getProductCatalog() {
       "New or Used": "",
       price: "$68 CAD",
       "Review Score": 4,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW1DWKS_060997_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -139,6 +157,8 @@ export function getProductCatalog() {
       "New or Used": "NEW",
       price: "$138 CAD",
       "Review Score": 4.8,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW3HJJS_061860_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -153,6 +173,8 @@ export function getProductCatalog() {
       "New or Used": "",
       price: "$64 CAD",
       "Review Score": 3.7,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW2CZ7S_056852_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
     {
       "Origin URL":
@@ -167,9 +189,14 @@ export function getProductCatalog() {
       "New or Used": "",
       price: "$88 CAD",
       "Review Score": 4.3,
+      "Image URL":
+        "https://images.lululemon.com/is/image/lululemon/LW6CLWS_056496_1?wid=1800&op_usm=0.8,1,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72",
     },
   ];
+}
 
+export function getProductCatalogAsString() {
+  const products = getProductCatalog();
   return products
     .map((p: any) =>
       Object.keys(p)

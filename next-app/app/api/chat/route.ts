@@ -1,7 +1,7 @@
 // ./app/api/chat/route.ts
 import { Configuration, OpenAIApi } from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
-import { getCustomerStatus, getProductCatalog } from "./data";
+import { getCustomerStatus, getProductCatalogAsString } from "./data";
 import { generalSystemPrompt } from "./prompts";
 import { get } from "http";
 
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
   const systemMessage = {
     role: "system",
     content: generalSystemPrompt(
-      getProductCatalog(),
+      getProductCatalogAsString(),
       getCustomerStatus(loggedIn === "true")
     ),
   };
