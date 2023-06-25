@@ -17,9 +17,9 @@ type Product = {
 
 function ProductCarousel({ products }: { products: Product[] }) {
   return (
-    <div className="flex gap-1 mt-2">
+    <div className="flex gap-1 mt-2 w-[112%] overflow-scroll ml-[-26px]">
       {products.map((product) => (
-        <Link href={product.url}>
+        <Link href={product.url} key={product.url}>
           <div className="flex gap-1 flex-col text-xs w-[150px]">
             <img src={product.imageUrl} alt="Product image" />
             <div className="break-words">{product.name}</div>
@@ -55,35 +55,42 @@ type ChatMessageProps = {
   message: Message;
 };
 export function ChatMessage({ message }: ChatMessageProps) {
+  const isUser = message.role === "user";
   return (
     <div className="whitespace-pre-wrap">
-      <div className="text-sm">
-        {message.role === "user" ? "User: " : "AI: "}
-      </div>
-      <div className="flex flex-col">
-        <ReactMarkdown
-          linkTarget="_blank"
-          components={{
-            a: ({ className, ...props }) => (
-              <a {...props} className={`${className} underline`} />
-            ),
-            ul: ({ className, ...props }) => (
-              <ul {...props} className={`${className} list-disc ml-4`} />
-            ),
-            ol: ({ className, ...props }) => (
-              <ol {...props} className={`${className} list-decimal ml-4`} />
-            ),
-            li: ({ className, ...props }) => (
-              <li {...props} className={`${className} whitespace-normal`} />
-            ),
-          }}
+      <div className={`flex gap-2 ${isUser ? "flex-row" : "flex-row-reverse"}`}>
+        <div className="text-[10px] bg-[#D00A2C] text-white p-2 rounded-[50%] w-[25px] h-[25px] self-baseline shrink-0 flex justify-center items-center">
+          {isUser ? "YOU" : "VA"}
+        </div>
+        <div
+          className={`text-sm p-3 rounded-md flex-1 ${
+            isUser ? "bg-black text-white" : "bg-[#EAEAEA]"
+          }`}
         >
-          {message.content}
-        </ReactMarkdown>
-        {message.role === "assistant" && (
-          <ProductCarousel products={extractProducts(message.content)} />
-        )}
+          <ReactMarkdown
+            linkTarget="_blank"
+            components={{
+              a: ({ className, ...props }) => (
+                <a {...props} className={`${className} underline`} />
+              ),
+              ul: ({ className, ...props }) => (
+                <ul {...props} className={`${className} list-disc ml-4`} />
+              ),
+              ol: ({ className, ...props }) => (
+                <ol {...props} className={`${className} list-decimal ml-4`} />
+              ),
+              li: ({ className, ...props }) => (
+                <li {...props} className={`${className} whitespace-normal`} />
+              ),
+            }}
+          >
+            {message.content}
+          </ReactMarkdown>
+        </div>
       </div>
+      {message.role === "assistant" && (
+        <ProductCarousel products={extractProducts(message.content)} />
+      )}
     </div>
   );
 }
