@@ -2561,10 +2561,10 @@ open@^9.1.0:
     is-inside-container "^1.0.0"
     is-wsl "^2.2.0"
 
-openai-edge@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/openai-edge/-/openai-edge-0.5.1.tgz#d71dd95476f7a1772cda137ba6d134bee94ba8e3"
-  integrity sha512-/Q/b9wkPKWIzcnsp2o0Of5QW/t4A0XLw+E7rjVSYR3gLVt+pWpFuWCgWPWUVS1UrrLJPvzmndwe1JMpfqLRJIQ==
+openai-edge@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/openai-edge/-/openai-edge-1.1.0.tgz#f9d6723cf4175b4d085664599805d8b8ec0c0aad"
+  integrity sha512-VkXT7yhKjr1QlC/wIMuPW/s003cPHUtiNjt/kH+54iKDZZ7eiGMPuymhpSWJ/zVZfVz6+94okGd6rNuu7JRBDw==
 
 openai@^3.3.0:
   version "3.3.0"
