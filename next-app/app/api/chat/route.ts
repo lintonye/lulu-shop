@@ -18,10 +18,16 @@ export async function POST(req: Request) {
   // Extract the `prompt` from the body of the request
   const { messages } = await req.json();
 
+  const url = new URL(req.url);
+  const loggedIn = url.searchParams.get("loggedIn");
+
   // Ask OpenAI for a streaming chat completion given the prompt
   const systemMessage = {
     role: "system",
-    content: generalSystemPrompt(getProductCatalog(), getCustomerStatus(false)),
+    content: generalSystemPrompt(
+      getProductCatalog(),
+      getCustomerStatus(loggedIn === "true")
+    ),
   };
 
   const functions = [
