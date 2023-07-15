@@ -1,5 +1,9 @@
 // ./app/api/chat/route.ts
-import { Configuration, OpenAIApi } from "openai-edge";
+import {
+  ChatCompletionRequestMessage,
+  Configuration,
+  OpenAIApi,
+} from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { getCustomerStatus, getProductCatalogAsString } from "./data";
 import { generalSystemPrompt } from "./prompts";
@@ -14,21 +18,41 @@ const openai = new OpenAIApi(config);
 // IMPORTANT! Set the runtime to edge
 export const runtime = "edge";
 
+async function retrieveContext(messages: ChatCompletionRequestMessage[]) {
+  const chatHistory = messages.slice(0, messages.length - 1);
+  const question = messages[messages.length - 1].content;
+  const response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    temperature: 0,
+    messages: [
+      ...chatHistory,
+      {
+        role: "user",
+        content: `Given the above conversation, rephrase the follow up question (delimited with three quotes) to be a standalone question. If the user's message is not a question, make it a standalone statement. The output should be just the question/statement itself. No quotes, colons.
+
+Avoid using pronouns such as "it", "these". Instead, extract the nouns from the conversation and use them in the output.        
+
+User message:        
+"""${question}"""
+
+Standalone question/statement:`,
+      },
+    ],
+    stream: false,
+  });
+  const result = await response.json();
+  const condensedQuestion = result.choices[0].message.content;
+  // retrieve context
+  const context = "context";
+  return { question: condensedQuestion, context };
+}
+
 export async function POST(req: Request) {
   // Extract the `prompt` from the body of the request
   const { messages } = await req.json();
 
   const url = new URL(req.url);
   const loggedIn = url.searchParams.get("loggedIn");
-
-  // Ask OpenAI for a streaming chat completion given the prompt
-  const systemMessage = {
-    role: "system",
-    content: generalSystemPrompt(
-      getProductCatalogAsString(),
-      getCustomerStatus(loggedIn === "true")
-    ),
-  };
 
   const functions = [
     {
@@ -84,12 +108,25 @@ export async function POST(req: Request) {
   //   }
   // );
 
-  console.log(messages);
+  // console.log(messages);
+
+  const { question, context } = await retrieveContext(messages);
+
+  console.log({ question, context });
+
+  const systemPrompt = generalSystemPrompt(
+    getProductCatalogAsString(),
+    getCustomerStatus(loggedIn === "true"),
+    context
+  );
 
   const response = await openai.createChatCompletion({
-    model: "gpt-4", //3.5-turbo-16k",
+    model: "gpt-4",
     stream: true,
-    messages: [systemMessage, ...messages],
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: question },
+    ],
   });
 
   // console.log(await response.json());

@@ -1,6 +1,7 @@
 export function generalSystemPrompt(
   productCatalog: string,
-  customerStatus: string
+  customerStatus: string,
+  context: string
 ) {
   return `You are a helpful Lululemon shop assistant (concierge). Customers will be asking for your help to recommend the best products based on what they are looking for. Before you respond, think about the best way to take on the personality and brand voice of the company and make sure that your responses embody that. Speak on behalf of the company Lululemon, using "we" just like an employee of the company would. Reply in markdown.
 
@@ -26,10 +27,15 @@ Product catalog:
 ---
 ${productCatalog}
 ---
+
+Context:
+---
+${context}
+---
 `;
 }
 
-const FAQ = `HEMMING
+export const FAQ = `HEMMING
 Your gear should never get in the way and that’s why we offer hemming at all our store locations—no tags or receipt required. To learn more about our complimentary hemming service, head HERE.
 
 CAN I BUY ONLINE AND PICK UP AT A STORE?
@@ -104,7 +110,7 @@ Credit cards and Apple Pay are accepted forms of payment for online transactions
 
 RETURNS
 RETURN POLICIES
-If you're having second thoughts about your product, you have 30 days from the purchase date to return it. To be eligible for a return, product must be unworn and unwashed, with hang tags attached, and accompanied by proof of purchase. Shoes must be in the box and accompanied by proof of purchase. Keep in mind, gift cards, face masks, and gear from our We Made Too Much section are final sale and cannot be returned or exchanged. To learn more, visit our RETURN POLICY PAGE.
+If you're having second thoughts about your product, you have 31 days from the purchase date to return it. To be eligible for a return, product must be unworn and unwashed, with hang tags attached, and accompanied by proof of purchase. Shoes must be in the box and accompanied by proof of purchase. Keep in mind, gift cards, face masks, and gear from our We Made Too Much section are final sale and cannot be returned or exchanged. To learn more, visit our RETURN POLICY PAGE.
 
 For lululemon Membership, SEE ADDITIONAL TERMS AND CONDITIONS.
 
