@@ -1,5 +1,5 @@
 import { ChatCompletionRequestMessage } from "openai-edge";
-import { openai } from "./route";
+import { openai } from "./openai";
 import faqs from "./faqs.json";
 
 function cosineSimilarity(a: number[], b: number[]) {
