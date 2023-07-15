@@ -1,15 +1,10 @@
 // ./app/api/chat/route.ts
-import { Configuration, OpenAIApi } from "openai-edge";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { getCustomerStatus, getProductCatalogAsString } from "./data";
 import { generalSystemPrompt } from "./prompts";
 import { get } from "http";
-
-// Create an OpenAI API client (that's edge friendly!)
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(config);
+import { retrieveContext } from "./retrieveContext";
+import { openai } from "./openai";
 
 // IMPORTANT! Set the runtime to edge
 export const runtime = "edge";
@@ -20,15 +15,6 @@ export async function POST(req: Request) {
 
   const url = new URL(req.url);
   const loggedIn = url.searchParams.get("loggedIn");
-
-  // Ask OpenAI for a streaming chat completion given the prompt
-  const systemMessage = {
-    role: "system",
-    content: generalSystemPrompt(
-      getProductCatalogAsString(),
-      getCustomerStatus(loggedIn === "true")
-    ),
-  };
 
   const functions = [
     {
@@ -84,12 +70,25 @@ export async function POST(req: Request) {
   //   }
   // );
 
-  console.log(messages);
+  // console.log(messages);
+
+  const { question, context } = await retrieveContext(messages);
+
+  console.log({ question, context });
+
+  const systemPrompt = generalSystemPrompt(
+    getProductCatalogAsString(),
+    getCustomerStatus(loggedIn === "true"),
+    context
+  );
 
   const response = await openai.createChatCompletion({
-    model: "gpt-4", //3.5-turbo-16k",
+    model: "gpt-4",
     stream: true,
-    messages: [systemMessage, ...messages],
+    messages: [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: question },
+    ],
   });
 
   // console.log(await response.json());

@@ -2,7 +2,7 @@
 
 import { useChat } from "ai/react";
 import { ChatMessage } from "../components/ChatMessage";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function SendIcon() {
   return (
@@ -21,11 +21,23 @@ function SendIcon() {
   );
 }
 
+function usePreviousValue<T>(value: T) {
+  const ref = useRef<T>();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 export default function Chat() {
   const [loggedIn, setLoggedIn] = useState(false);
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: `/api/chat?loggedIn=${loggedIn}`,
-  });
+  const { messages, input, handleInputChange, handleSubmit, isLoading } =
+    useChat({
+      api: `/api/chat?loggedIn=${loggedIn}`,
+    });
+
+  const prevMessages = usePreviousValue(messages);
+  const isAiThinking = isLoading && prevMessages === messages;
 
   return (
     <div className="flex flex-col w-full max-w-md pb-24 mx-auto stretch">
@@ -33,6 +45,15 @@ export default function Chat() {
         {messages.length > 0
           ? messages.map((m) => <ChatMessage key={m.id} message={m} />)
           : null}
+        {isAiThinking && (
+          <ChatMessage
+            message={{
+              id: "loading",
+              role: "assistant",
+              content: "...",
+            }}
+          />
+        )}
       </div>
       <form onSubmit={handleSubmit} className="fixed bottom-0 w-full">
         <input
