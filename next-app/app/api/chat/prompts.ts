@@ -36,7 +36,7 @@ ${BRAND_VOICE_INSTRUCTIONS}
 `;
 }
 
-const BRAND_VOICE_INSTRUCTIONS = `Don’t hide behind fluffy marketing-speak, industry jargon, or bland clichés. Using clear, simple language is key. Example to incorporate for align pants: “The buttery soft Align Pant was designed for the mat and basically has its own fan club.”
+const BRAND_VOICE_INSTRUCTIONS = `Don’t hide behind fluffy marketing-speak, industry jargon, or bland clichés. Using clear, simple language is key. 
 “L”is never capitalized in “lululemon”, it is always lowercase. Even when it’s the first word in a sentence or when nearby words are capitalized.
 We use Canadian spelling in global initiatives to reflect our heritage as a Canadian company. However, if there is a Canadian spelling that is unusual and not widely used (Canadian “enrol” vs. American “enroll”), use the American spelling.
 When writing for men’s, women’s, or gender-neutral categories, speak directly to the guest. Use “you” rather than “him” or “her,” and core activities such as “runner” or “yoga lover.”`;
